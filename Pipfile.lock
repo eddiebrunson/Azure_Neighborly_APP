@@ -74,10 +74,10 @@
         },
         "azure-core": {
             "hashes": [
-                "sha256:a4db9e64fc0de9d19d004d6b3b908459aa7d9cb6730734c485f738cb56a1ef27",
-                "sha256:ef8ae93a2ce8b595f231395579be11aadc1838168cbc2582e2d0bbd8b15c461f"
+                "sha256:1467d0785dbf01f45248330d98ad3482b68b30f816eb6123b777a60be57ca99d",
+                "sha256:b9cddf3eb239e32b14cf44750b21d7bc8d78b82aa53d57628523598dcd006803"
             ],
-            "version": "==1.9.0"
+            "version": "==1.10.0"
         },
         "azure-cosmos": {
             "hashes": [
@@ -112,7 +112,7 @@
                 "sha256:cd1ea2ff3038509ea95f687256c46b79f5fc382ad0aa3664d200047546d511d1",
                 "sha256:cdcdcb3972027f83fe24a48b1e90ea4b584d35f1cc279d76de6fc4b13376239d"
             ],
-            "markers": "python_full_version >= '3.6.0'",
+            "markers": "python_version >= '3.6'",
             "version": "==3.2.0"
         },
         "certifi": {
