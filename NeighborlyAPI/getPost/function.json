@@ -9,6 +9,7 @@
       "methods": [
         "get"
       ]
+      "connection": "MyDbConnection"
     },
     {
       "type": "http",

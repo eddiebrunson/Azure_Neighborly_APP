@@ -9,9 +9,9 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     if request:
         try:
-            url = "localhost"  # TODO: Update with appropriate MongoDB connection information
+            url = os.environ ["MyDbConnection"]  # TODO: Update with appropriate MongoDB connection information
             client = pymongo.MongoClient(url)
-            database = client['azure']
+            database = client['mongodb01']
             collection = database['advertisements']
             
             filter_query = {'_id': ObjectId(id)}
