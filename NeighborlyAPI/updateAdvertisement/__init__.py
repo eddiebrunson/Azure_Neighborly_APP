@@ -1,6 +1,7 @@
 import azure.functions as func
 import pymongo
 from bson.objectid import ObjectId
+import os
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
 

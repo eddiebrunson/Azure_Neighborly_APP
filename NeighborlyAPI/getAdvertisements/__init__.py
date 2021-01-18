@@ -2,7 +2,7 @@ import azure.functions as func
 import pymongo
 import json
 from bson.json_util import dumps
-
+import os 
 def main(req: func.HttpRequest) -> func.HttpResponse:
 
     try:
