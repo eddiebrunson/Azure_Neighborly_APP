@@ -1,9 +1,15 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "FUNCTIONS_WORKER_RUNTIME": "python"
+    "FUNCTIONS_WORKER_RUNTIME": "python",
+    "AzureWebJobs.createAdvertisement.Disabled": "true",
+    "AzureWebJobs.deleteAdvertisement.Disabled": "true",
+    "AzureWebJobs.getAdvertisement.Disabled": "true",
+    "AzureWebJobs.getAdvertisements.Disabled": "true",
+    "AzureWebJobs.getPost.Disabled": "true",
+    "AzureWebJobs.getPosts.Disabled": "true",
+    "AzureWebJobs.updateAdvertisement.Disabled": "true"
   },
   "ConnectionStrings": {},
-
   "AzureWebJobsStorage": ""
 }
