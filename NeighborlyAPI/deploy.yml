@@ -1,0 +1,168 @@
+data:
+  FUNCTIONS_WORKER_RUNTIME: cHl0aG9u
+apiVersion: v1
+kind: Secret
+metadata:
+  name: p2cluster
+  namespace: default
+---
+data:
+  functions.createadvertisement.default: eVJUYS9PQmk0U0UvYUQzMkNsUG1xTmZ5dG12TmpFTjZzUzQwYmxMbWNxT2w1aUpsYktsMGFBPT0=
+  functions.deleteadvertisement.default: aFZ0blBvS2h1OExndTNRa0hjUFV0MG9pcklLUWp6c1pyd0ZBdnB5dVA1RHFhNGxmYkZJZXRRPT0=
+  functions.getadvertisement.default: dVc2WTBTTllyYUxlWVVvZnozR3V5NS93NnZKTmw2TmgzWEdWUjY0L1RtM2hMUHBlRW5aaXNnPT0=
+  functions.getadvertisements.default: M3ZuYWFnUC9GNjR1SzR4Y2k1amRseWwxQVZBQnppalZnV1d6eFpmZncyd2FuelJ3eFk1VU5RPT0=
+  functions.getpost.default: VGxwMmhOLzB4Ry9oQVNTVUc5YWdwRFVDYmZEZVh6QkI5UDlRdHo5OVgxT3F3c1ljUXVhYWZ3PT0=
+  functions.getposts.default: aVB6bklWSTAwZlNzaW5MYS9venhLVEtKcDdoTVp1QXkxdWFGLzA1bnp6djNMQlFnZmdQc2xRPT0=
+  functions.updateadvertisement.default: VWhXU0xnNHhvSGNrdWJUcFFpT08vc1pPbkZpN0lxMTg5Q0tCc3Nwd3ZCZU1UY3RRVGFoY0xBPT0=
+  host.function.default: MGV5dnk4NHNyaEdOcUIyL2RHSnd6TXpaVnJjeDhSUUVEU3NDMGRMV2ZvRzBVUnMvOVJKQ1hnPT0=
+  host.master: RzFtTUhNWjRTamNlYm1HV3ZJdDRjWTA3SGtvTU1qSjRCcTJoekRzN2kwYm9WL0JZbXVNVTJnPT0=
+  host.systemKey.default: a0xTUklVZ3NiVHdEL3NhN1NvYVU4RHpYbVJLTjhrM2E5aUtYazhtSlRpd3RsTHFydXZiUklRPT0=
+apiVersion: v1
+kind: Secret
+metadata:
+  name: func-keys-kube-secret-p2cluster
+  namespace: default
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: p2cluster-function-keys-identity-svc-act
+  namespace: default
+---
+rules:
+- apiGroups:
+  - ''
+  resources:
+  - secrets
+  - configMaps
+  verbs:
+  - get
+  - list
+  - watch
+  - create
+  - update
+  - patch
+  - delete
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: functions-keys-manager-role
+  namespace: default
+---
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: functions-keys-manager-role
+subjects:
+- kind: ServiceAccount
+  name: p2cluster-function-keys-identity-svc-act
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: p2cluster-function-keys-identity-svc-act-functions-keys-manager-rolebinding
+  namespace: default
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: p2cluster-http
+  namespace: default
+spec:
+  selector:
+    app: p2cluster-http
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: p2cluster-http
+  namespace: default
+  labels:
+    app: p2cluster-http
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: p2cluster-http
+  template:
+    metadata:
+      labels:
+        app: p2cluster-http
+    spec:
+      containers:
+      - name: p2cluster-http
+        image: neighborlyregistry1.azurecr.io/dockerimage
+        ports:
+        - containerPort: 80
+        env:
+        - name: AzureFunctionsJobHost__functions__0
+          value: createAdvertisement
+        - name: AzureFunctionsJobHost__functions__1
+          value: deleteAdvertisement
+        - name: AzureFunctionsJobHost__functions__2
+          value: getAdvertisement
+        - name: AzureFunctionsJobHost__functions__3
+          value: getAdvertisements
+        - name: AzureFunctionsJobHost__functions__4
+          value: getPost
+        - name: AzureFunctionsJobHost__functions__5
+          value: getPosts
+        - name: AzureFunctionsJobHost__functions__6
+          value: updateAdvertisement
+        - name: AzureWebJobsSecretStorageType
+          value: kubernetes
+        - name: AzureWebJobsKubernetesSecretName
+          value: secrets/func-keys-kube-secret-p2cluster
+        envFrom:
+        - secretRef:
+            name: p2cluster
+      serviceAccountName: p2cluster-function-keys-identity-svc-act
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: p2cluster
+  namespace: default
+  labels:
+    app: p2cluster
+spec:
+  selector:
+    matchLabels:
+      app: p2cluster
+  template:
+    metadata:
+      labels:
+        app: p2cluster
+    spec:
+      containers:
+      - name: p2cluster
+        image: neighborlyregistry1.azurecr.io/dockerimage
+        env:
+        - name: AzureFunctionsJobHost__functions__0
+          value: eventHubTrigger
+        envFrom:
+        - secretRef:
+            name: p2cluster
+      serviceAccountName: p2cluster-function-keys-identity-svc-act
+---
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: p2cluster
+  namespace: default
+  labels: {}
+spec:
+  scaleTargetRef:
+    name: p2cluster
+  triggers:
+  - type: eventgridtrigger
+    metadata:
+      direction: in
+      eventHubName: testhub
+      connection: Endpoint=sb://udacityneighborly.servicebus.windows.net/;SharedAccessKeyName=allpolicy;SharedAccessKey=LOxUOkN13xN038T1VoSsmaTt4s7vq/+VCzduS5/nH9A=;EntityPath=testhub
+---
+
