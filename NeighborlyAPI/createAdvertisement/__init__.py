@@ -1,5 +1,10 @@
 import azure.functions as func
 import pymongo
+import json
+from bson.json_util import dumps
+from bson.objectid import ObjectId
+import logging
+import os
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
 

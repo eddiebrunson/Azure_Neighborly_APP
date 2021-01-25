@@ -2,14 +2,18 @@
   "IsEncrypted": false,
   "Values": {
     "FUNCTIONS_WORKER_RUNTIME": "python",
-    "AzureWebJobs.createAdvertisement.Disabled": "true",
-    "AzureWebJobs.deleteAdvertisement.Disabled": "true",
-    "AzureWebJobs.getAdvertisement.Disabled": "true",
-    "AzureWebJobs.getAdvertisements.Disabled": "true",
-    "AzureWebJobs.getPost.Disabled": "true",
-    "AzureWebJobs.getPosts.Disabled": "true",
-    "AzureWebJobs.updateAdvertisement.Disabled": "true"
+    "FUNCTIONS_EXTENSION_VERSION": "~3",
+    "APPINSIGHTS_INSTRUMENTATIONKEY": "cbae5363-c730-4101-8b75-b89f30f77081",
+    "APPLICATIONINSIGHTS_CONNECTION_STRING": "InstrumentationKey=cbae5363-c730-4101-8b75-b89f30f77081;IngestionEndpoint=https://eastus-5.in.applicationinsights.azure.com/",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=azureudproject2;AccountKey=78RYKrIxiBcPFFmkoOO+/BXAVAEjUqFF35z3y9wV4Bmiba9d+73+9hT89c0ROKhzjiYcTDAofOLDxW0RDRWpWQ==;EndpointSuffix=core.windows.net",
+    "MyDbConnection": "mongodb://azureudcosmosdb:Shw2KvCq3UITlfFPKjfFXlCOhFgsc0to0lDp6fIcwFfTBbLVJcVxY0Zy5Vr3hvdYi1GglpVT7khg3gtg7E3lTA==@azureudcosmosdb.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@azureudcosmosdb@",
+    "AzureWebJobs.createAdvertisement.Disabled": "0",
+    "AzureWebJobs.deleteAdvertisement.Disabled": "0",
+    "AzureWebJobs.getAdvertisement.Disabled": "0",
+    "AzureWebJobs.getPost.Disabled": "0",
+    "AzureWebJobs.getPosts.Disabled": "0",
+    "AzureWebJobs.updateAdvertisement.Disabled": "0",
+    "AzureWebJobs.getAdvertisements.Disabled": "0"
   },
-  "ConnectionStrings": {},
-  "AzureWebJobsStorage": ""
+  "ConnectionStrings": {}
 }

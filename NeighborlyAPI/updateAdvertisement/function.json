@@ -10,7 +10,6 @@
         "put"
       ],
       "connection": "MyDbConnection"
-
     },
     {
       "type": "http",

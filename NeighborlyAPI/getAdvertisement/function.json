@@ -9,7 +9,7 @@
       "methods": [
         "get",
         "post"
-      ]
+      ],
       "connection": "MyDbConnection"
     },
     {

@@ -8,9 +8,8 @@
       "name": "req",
       "methods": [
         "get"
-      ]
+      ],
       "connection": "MyDbConnection"
-
     },
     {
       "type": "http",
