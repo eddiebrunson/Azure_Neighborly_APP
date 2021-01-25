@@ -162,7 +162,7 @@ spec:
   - type: eventgridtrigger
     metadata:
       direction: in
-      eventHubName: testhub
-      connection: Endpoint=sb://udacityneighborly.servicebus.windows.net/;SharedAccessKeyName=allpolicy;SharedAccessKey=LOxUOkN13xN038T1VoSsmaTt4s7vq/+VCzduS5/nH9A=;EntityPath=testhub
+      eventHubName: neighborly
+      connection: Endpoint=sb://neighborly.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=LZ2otF1O+R4FYtZlh0yKq4XBYOy7COqDrD/XbIWcqko=
 ---
 
